@@ -19,13 +19,10 @@ class Recovery: public wxDialog
 
 		//(*Declarations(Recovery)
 		wxButton* RecoverButton;
-		wxPanel* UsernamePanel;
 		wxPanel* EmailPanel;
-		wxStaticBitmap* UsernameBitmap;
 		wxStaticBitmap* EmailBitmap;
 		wxStaticText* ForgotPasswordText;
 		wxStaticText* InstructionText;
-		wxTextCtrl* UsernameCtrl;
 		wxTextCtrl* EmailCtrl;
 		//*)
 
@@ -34,9 +31,6 @@ class Recovery: public wxDialog
 		//(*Identifiers(Recovery)
 		static const long ID_FORGOTPASSWORDTEXT;
 		static const long ID_INSTRUCTIONTEXT;
-		static const long ID_USERNAMEBITMAP;
-		static const long ID_USERNAMECTRL;
-		static const long ID_USERNAMEPANEL;
 		static const long ID_EMAILBITMAP;
 		static const long ID_EMAILCTRL;
 		static const long ID_EMAILPANEL;

@@ -127,11 +127,13 @@
     <ClCompile Include="LoginApp.cpp" />
     <ClCompile Include="LoginMain.cpp" />
     <ClCompile Include="Recovery.cpp" />
+    <ClCompile Include="ResetPassword.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoginApp.h" />
     <ClInclude Include="LoginMain.h" />
     <ClInclude Include="Recovery.h" />
+    <ClInclude Include="ResetPassword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

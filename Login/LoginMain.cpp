@@ -9,6 +9,7 @@
 
 #include "LoginMain.h"
 #include "Recovery.h"
+#include "ResetPassword.h"
 #include <wx/msgdlg.h>
 
  //(*InternalHeaders(LoginDialog)
@@ -72,26 +73,26 @@ LoginDialog::LoginDialog(wxWindow* parent, wxWindowID id)
 	wxFlexGridSizer* FlexGridSizer2;
 	wxFlexGridSizer* FlexGridSizer3;
 
-	Create(parent, wxID_ANY, _("wxWidgets app"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
-	this->SetBackgroundColour(wxColor("#4693d8"));
+	Create(parent, wxID_ANY, _("Login"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
 	FlexGridSizer1 = new wxFlexGridSizer(7, 1, 0, 0);
-	WelcomeText = new wxStaticText(this, ID_WELCOMETEXT, _("Welcome"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+	WelcomeText = new wxStaticText(this, ID_WELCOMETEXT, _("Welcome"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_WELCOMETEXT"));
 	wxFont welcome = WelcomeText->GetFont();
 	welcome.SetPointSize(19);
 	welcome.MakeBold();
 	welcome.MakeUnderlined();
 	WelcomeText->SetFont(welcome);
 	FlexGridSizer1->Add(WelcomeText, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
-	InstructionText = new wxStaticText(this, ID_INSTRUCTIONTEXT, _("Enter Username and Password"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_STATICTEXT2"));
+	InstructionText = new wxStaticText(this, ID_INSTRUCTIONTEXT, _("Enter Username and Password"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_INSTRUCTIONTEXT"));
 	FlexGridSizer1->Add(InstructionText, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxST_NO_AUTORESIZE, 5);
 	UsernamePanel = new wxPanel(this, ID_USERNAMEPANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_USERNAMEPANEL"));
 	FlexGridSizer2 = new wxFlexGridSizer(0, 2, 0, 0);
 	wxString usernameLocation = wxStandardPaths::Get().GetResourcesDir() + wxT("/Username.png");
 	wxString passwordLocation = wxStandardPaths::Get().GetResourcesDir() + wxT("/Password.png");
-	UsernameBitmap = new wxStaticBitmap(UsernamePanel, ID_USERNAMEBITMAP, wxBitmap(wxImage(usernameLocation)), wxDefaultPosition, wxSize(wxImage(usernameLocation).GetWidth() + 2, wxImage(usernameLocation).GetHeight() + 6), wxSIMPLE_BORDER, _T("ID_STATICBITMAP1"));
+	UsernameBitmap = new wxStaticBitmap(UsernamePanel, ID_USERNAMEBITMAP, wxBitmap(wxImage(usernameLocation)), wxDefaultPosition, wxSize(wxImage(usernameLocation).GetWidth() + 2, wxImage(usernameLocation).GetHeight() + 6), wxSIMPLE_BORDER, _T("ID_USERNAMEBITMAP"));
 	UsernameBitmap->SetBackgroundColour(wxColour(*wxWHITE));
 	FlexGridSizer2->Add(UsernameBitmap, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 0);
-	UsernameCtrl = new wxTextCtrl(UsernamePanel, ID_USERNAMECTRL, wxEmptyString, wxDefaultPosition, wxSize(200, wxImage(usernameLocation).GetHeight() + 6), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+	UsernameCtrl = new wxTextCtrl(UsernamePanel, ID_USERNAMECTRL, wxEmptyString, wxDefaultPosition, wxSize(200, wxImage(usernameLocation).GetHeight() + 6), 0, wxDefaultValidator, _T("ID_USERNAMECTRL"));
+	UsernameCtrl->SetHint("Username");
 	FlexGridSizer2->Add(UsernameCtrl, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 0);
 	UsernamePanel->SetSizer(FlexGridSizer2);
 	FlexGridSizer2->Fit(UsernamePanel);
@@ -99,10 +100,11 @@ LoginDialog::LoginDialog(wxWindow* parent, wxWindowID id)
 	FlexGridSizer1->Add(UsernamePanel, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
 	PasswordPanel = new wxPanel(this, ID_PASSWORDPANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PASSWORDPANEL"));
 	FlexGridSizer3 = new wxFlexGridSizer(0, 3, 0, 0);
-	PasswordBitmap = new wxStaticBitmap(PasswordPanel, ID_PASSWORDBITMAP, wxBitmap(wxImage(passwordLocation)), wxDefaultPosition, wxSize(wxImage(passwordLocation).GetWidth() + 2, wxImage(passwordLocation).GetHeight() + 6), wxSIMPLE_BORDER, _T("ID_STATICBITMAP2"));
+	PasswordBitmap = new wxStaticBitmap(PasswordPanel, ID_PASSWORDBITMAP, wxBitmap(wxImage(passwordLocation)), wxDefaultPosition, wxSize(wxImage(passwordLocation).GetWidth() + 2, wxImage(passwordLocation).GetHeight() + 6), wxSIMPLE_BORDER, _T("ID_PASSWORDBITMAP"));
 	PasswordBitmap->SetBackgroundColour(wxColour(*wxWHITE));
 	FlexGridSizer3->Add(PasswordBitmap, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 0);
-	PasswordCtrl = new wxTextCtrl(PasswordPanel, ID_PASSWORDCTRL, wxEmptyString, wxDefaultPosition, wxSize(200, wxImage(passwordLocation).GetHeight() + 6), wxTE_PASSWORD, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+	PasswordCtrl = new wxTextCtrl(PasswordPanel, ID_PASSWORDCTRL, wxEmptyString, wxDefaultPosition, wxSize(200, wxImage(passwordLocation).GetHeight() + 6), wxTE_PASSWORD, wxDefaultValidator, _T("ID_PASSWORDCTRL"));
+	PasswordCtrl->SetHint("Password");
 	wxFont textBox = UsernameCtrl->GetFont();
 	textBox.SetPointSize(12);
 	UsernameCtrl->SetFont(textBox);
@@ -112,13 +114,12 @@ LoginDialog::LoginDialog(wxWindow* parent, wxWindowID id)
 	FlexGridSizer3->Fit(PasswordPanel);
 	FlexGridSizer3->SetSizeHints(PasswordPanel);
 	FlexGridSizer1->Add(PasswordPanel, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
-	RememberMeCheckBox = new wxCheckBox(this, ID_REMEMBERMECHECKBOX, _("Remember Me"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
+	RememberMeCheckBox = new wxCheckBox(this, ID_REMEMBERMECHECKBOX, _("Remember Me"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_REMEMBERCHECKBOX"));
 	RememberMeCheckBox->SetValue(false);
 	FlexGridSizer1->Add(RememberMeCheckBox, 1, wxALL |  wxALIGN_CENTER_VERTICAL, 5);
-	LoginButton = new wxButton(this, ID_LOGINBUTTON, _("Login"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-	LoginButton->SetBackgroundColour(wxColour("#f8ec7d"));
+	LoginButton = new wxButton(this, ID_LOGINBUTTON, _("Login"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("LOGINBUTTON"));
 	FlexGridSizer1->Add(LoginButton, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
-	ForgotPasswordHyperLink = new wxHyperlinkCtrl(this, ID_FORGOTPASSWORDHYPERLINK, _("Forgot Password"), wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHL_CONTEXTMENU | wxHL_ALIGN_CENTRE | wxNO_BORDER, _T("ID_HYPERLINKCTRL1"));
+	ForgotPasswordHyperLink = new wxHyperlinkCtrl(this, ID_FORGOTPASSWORDHYPERLINK, _("Forgot Account"), wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHL_CONTEXTMENU | wxHL_ALIGN_CENTRE | wxNO_BORDER, _T("ID_FORGOTPASSWORDHYPERLINK"));
 	FlexGridSizer1->Add(ForgotPasswordHyperLink, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(FlexGridSizer1);
 	FlexGridSizer1->Fit(this);
@@ -152,16 +153,14 @@ void LoginDialog::OnLoginButtonClick(wxCommandEvent& event)
 void LoginDialog::OnForgotPasswordHyperLinkClick(wxCommandEvent& event)
 {
 	//Forgot Password
-	Recovery temp_dlg(this);
-	int dlg = temp_dlg.ShowModal();
-	if (dlg == wxID_OK) {
-		std::string username = std::string(temp_dlg.UsernameCtrl->GetValue());
-		std::string password = std::string(temp_dlg.EmailCtrl->GetValue());
-		UsernameCtrl->SetLabelText(username);
-		PasswordCtrl->Clear();
-		InstructionText->SetLabelText("Check Your Email For Password");
-		/***************************************************************
-		 *INSERT CODE FOR SENDING EMAIL
-		 **************************************************************/
+	Recovery temp_recovery(this);
+	int recoverydlg = temp_recovery.ShowModal();
+	std::string password = std::string(temp_recovery.EmailCtrl->GetValue());
+	UsernameCtrl->Clear();
+	PasswordCtrl->Clear();
+		
+	if (temp_recovery.RecoverButton->GetId()== wxOK) {
+		ResetPassword temp_reset(this);
+		int resetdlg = temp_reset.ShowModal();
 	}
 }

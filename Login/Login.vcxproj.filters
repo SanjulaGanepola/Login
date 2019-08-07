@@ -24,6 +24,9 @@
     <ClCompile Include="Recovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResetPassword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoginMain.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Recovery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResetPassword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
