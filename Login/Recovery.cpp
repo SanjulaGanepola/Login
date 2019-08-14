@@ -28,11 +28,12 @@ Recovery::Recovery(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSiz
 	wxFlexGridSizer* FlexGridSizer1;
 	wxFlexGridSizer* FlexGridSizer3;
 
-	Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Forgot Account"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
 	FlexGridSizer1 = new wxFlexGridSizer(6, 1, 0, 0);
 	ForgotPasswordText = new wxStaticText(this, ID_FORGOTPASSWORDTEXT, _("Forgot Account"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_FORGOTPASSWORDTEXT"));
 	wxFont forgotPassword = ForgotPasswordText->GetFont();
 	forgotPassword.SetPointSize(14);
+	forgotPassword.MakeUnderlined();
 	forgotPassword.MakeBold();
 	ForgotPasswordText->SetFont(forgotPassword);
 	FlexGridSizer1->Add(ForgotPasswordText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);

@@ -31,12 +31,13 @@ ResetPassword::ResetPassword(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	wxFlexGridSizer* FlexGridSizer3;
 	wxFlexGridSizer* FlexGridSizer4;
 
-	Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Reset Password"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
 	FlexGridSizer1 = new wxFlexGridSizer(5, 0, 0, 0);
 	ResetPasswordText = new wxStaticText(this, ID_RESETPASSWORDTEXT, _("Reset Password"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_RESETPASSWORDTEXT"));
 	wxFont resetPassword = ResetPasswordText->GetFont();
 	resetPassword.SetPointSize(14);
 	resetPassword.MakeBold();
+	resetPassword.MakeUnderlined();
 	ResetPasswordText->SetFont(resetPassword);
 	FlexGridSizer1->Add(ResetPasswordText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	InstructionText = new wxStaticText(this, ID_INSTRUCTIONTEXT, _("Retrieve Temporary Email Password"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_INSTRUCTIONTEXT"));
